@@ -37,7 +37,7 @@ router.post('/add',[
           console.log(fields)
           res.json(results)
       })
-  }}, function(err,blog){
+  }}, function(err,index){
       if(err){
           res.send(err);
       }else{

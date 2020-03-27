@@ -2,10 +2,10 @@ const mysql = require('mysql') // เรียกใช้งาน MySQL module
  
 // กำหนดการเชื่อมต่อฐานข้อมูล
 const db = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'final'
+    host     : 'us-cdbr-iron-east-02.cleardb.net',
+    user     : 'baaada9f7f1ce6',
+    password : 'bdc6dca9',
+    database : 'heroku_7adab1fa957beed'
   })
  
 // ทำการเชื่อมต่อกับฐานข้อมูล 
