@@ -20,7 +20,7 @@ router.post('/add',[
           "username": req.body.username , 
           "password": req.body.password
       }
-      let sql = ' INSERT INTO test_bb SET ? '
+      let sql = ' INSERT INTO user SET ? '
       db.query(sql, user, (error, results, fields)=>{
           console.log(error)
           if(error) {
@@ -35,7 +35,7 @@ router.post('/add',[
       if(err){
           res.send(err);
       }else{
-          req.flash("error","บันทึกบทความเรียบร้อยแล้ว");
+          req.flash("error","บันทึกข้อมูลเรียบร้อยแล้ว");
           res.location('/blog/add');
           res.redirect('/blog/add');
       }
