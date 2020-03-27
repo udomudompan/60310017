@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+const { check, validationResult } = require('express-validator');
+const db = require('../config/db')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/add', function(req, res, next) {
+  res.render('index');
 });
 
 router.post('/add',[
@@ -36,8 +42,8 @@ router.post('/add',[
           res.send(err);
       }else{
           req.flash("error","บันทึกข้อมูลเรียบร้อยแล้ว");
-          res.location('/blog/add');
-          res.redirect('/blog/add');
+          res.location('/index/');
+          res.redirect('/index/');
       }
   }
 );

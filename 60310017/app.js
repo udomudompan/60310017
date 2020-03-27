@@ -6,10 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const userRouter = require('./routes/users')
-const userApi = require('./api/users')
+//var userApi = require('./api/users')
 
 var app = express();
+var session = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,15 +21,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
 app.use(require('connect-flash')());
-app.use(function (req , res , next) {
-  res.locals.messages = require('express-message')(req , res);
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
 });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/user', userRouter)
-app.use('/api', [userApi]) 
+//app.use('/api',[userApi])
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
