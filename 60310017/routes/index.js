@@ -6,4 +6,40 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/add',[
+  check("username","Please Input your username").not().isEmpty(),
+  check("password","Please Input your password").not().isEmpty()
+], function(req, res, next) {
+  const result = validationResult(req);
+  var errors = result.errors;
+  if (!result.isEmpty()){
+      res.render('index',{errors:errors});
+  }else{
+      let user = {
+      
+          "username": req.body.username , 
+          "password": req.body.password
+      }
+      let sql = ' INSERT INTO test_bb SET ? '
+      db.query(sql, user, (error, results, fields)=>{
+          console.log(error)
+          if(error) {
+              throw error
+          }   
+          console.log(results.insertId)
+          console.log(results)
+          console.log(fields)
+          res.json(results)
+      })
+  }}, function(err,blog){
+      if(err){
+          res.send(err);
+      }else{
+          req.flash("error","บันทึกบทความเรียบร้อยแล้ว");
+          res.location('/blog/add');
+          res.redirect('/blog/add');
+      }
+  }
+);
+
 module.exports = router;
